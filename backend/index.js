@@ -1,4 +1,5 @@
-require("dotenv").config();
+const path = require("path");
+require("dotenv").config({ path: path.resolve(__dirname, "../.env") });
 
 const express = require("express");
 const mongoose = require("mongoose");
@@ -204,6 +205,52 @@ app.get("/allOrders", async (req, res) => {
   res.json(allOrders);
 });
 
+app.get("/stocks", async (req, res) => {
+  const stocks = [
+    {
+      symbol: "RELIANCE",
+      name: "Reliance Industries Ltd.",
+      price: 2311.55,
+      change: "+14.60",
+      changePercent: "+0.64%",
+      volume: "3.8M",
+    },
+    {
+      symbol: "TCS",
+      name: "Tata Consultancy Services Ltd.",
+      price: 3261.75,
+      change: "-8.20",
+      changePercent: "-0.25%",
+      volume: "1.2M",
+    },
+    {
+      symbol: "HDFCBANK",
+      name: "HDFC Bank Ltd.",
+      price: 1606.80,
+      change: "+19.30",
+      changePercent: "+1.22%",
+      volume: "5.5M",
+    },
+    {
+      symbol: "INFY",
+      name: "Infosys Ltd.",
+      price: 1499.15,
+      change: "+11.95",
+      changePercent: "+0.80%",
+      volume: "8.9M",
+    },
+    {
+      symbol: "ICICIBANK",
+      name: "ICICI Bank Ltd.",
+      price: 935.45,
+      change: "+5.35",
+      changePercent: "+0.58%",
+      volume: "9.1M",
+    },
+  ];
+  res.json(stocks);
+});
+
 app.post("/newOrder", async (req, res) => {
   let newOrder = new OrdersModel({
     name: req.body.name,
@@ -245,7 +292,8 @@ app.post("/login", async (req, res) => {
 
     res.json({
       message: "Login successful",
-      token
+      token,
+      user: { name: user.name, email: user.email }
     });
   } catch (error) {
     res.status(500).json({
@@ -254,6 +302,30 @@ app.post("/login", async (req, res) => {
   }
 });
 
+app.get("/profile", async (req, res) => {
+  try {
+    const authHeader = req.headers.authorization;
+    if (!authHeader || !authHeader.startsWith("Bearer ")) {
+      return res.status(401).json({ message: "Unauthorized" });
+    }
+
+    const token = authHeader.split(" ")[1];
+    const payload = jwt.verify(token, process.env.JWT_SECRET || "SECRET_KEY");
+    const user = await UserModel.findOne({ email: payload.email }).select("name email");
+
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    res.json({
+      name: user.name,
+      email: user.email,
+      welcome: `Welcome back, ${user.name}`,
+    });
+  } catch (error) {
+    res.status(401).json({ message: "Invalid or expired token" });
+  }
+});
 
 app.post("/signup", async (req, res) => {
   try {

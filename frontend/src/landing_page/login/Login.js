@@ -5,9 +5,8 @@ import { Link } from "react-router-dom";
 const API_URL = process.env.REACT_APP_API_URL || "http://localhost:3002";
 const DASHBOARD_URL = process.env.REACT_APP_DASHBOARD_URL || "http://localhost:3001";
 
-function Signup() {
+function Login() {
   const [user, setUser] = useState({
-    name: "",
     email: "",
     password: "",
   });
@@ -17,46 +16,46 @@ function Signup() {
     loading: false,
   });
 
-  const handleSignup = async () => {
-    if (!user.name || !user.email || !user.password) {
+  const handleLogin = async () => {
+    if (!user.email || !user.password) {
       setStatus({
-        message: "Please complete all fields before continuing.",
+        message: "Please enter both email and password.",
         type: "danger",
         loading: false,
       });
       return;
     }
 
-    setStatus({ message: "Creating account...", type: "info", loading: true });
+    setStatus({ message: "Logging in...", type: "info", loading: true });
 
     try {
-      const res = await axios.post(`${API_URL}/signup`, user);
+      const res = await axios.post(`${API_URL}/login`, user);
       const token = res.data.token;
       const redirectUrl = `${DASHBOARD_URL}/?token=${encodeURIComponent(token)}`;
       window.location.href = redirectUrl;
     } catch (err) {
-      const message = err?.response?.data?.message || "Unable to complete signup. Please try again.";
+      const message = err?.response?.data?.message || "Unable to login. Please check your credentials.";
       setStatus({ message, type: "danger", loading: false });
     }
   };
 
   return (
-    <section className="signup-page py-5 bg-light">
+    <section className="login-page py-5 bg-light">
       <div className="container">
         <div className="row g-4 justify-content-center align-items-center">
           <div className="col-lg-6">
             <div className="card auth-card shadow-sm border-0 h-100">
               <div className="card-body p-5">
-                <span className="badge bg-primary mb-3">New account</span>
-                <h1 className="mb-4">Open your account</h1>
+                <span className="badge bg-success mb-3">Welcome back</span>
+                <h1 className="mb-4">Access your account</h1>
                 <p className="text-muted mb-4">
-                  Start investing in stocks, ETFs, and mutual funds with a clean Zerodha-style onboarding experience.
+                  Continue your trading journey with secure login and access to your portfolio.
                 </p>
                 <ul className="feature-list ps-3 mb-0">
-                  <li>Secure signup with password hashing</li>
-                  <li>Access Indian stock market listings and watchlists</li>
-                  <li>Clean, responsive brand experience</li>
-                  <li>Fast onboarding for new investors</li>
+                  <li>Secure login with JWT authentication</li>
+                  <li>Access your holdings and positions</li>
+                  <li>View order history and performance</li>
+                  <li>Manage your investment portfolio</li>
                 </ul>
               </div>
             </div>
@@ -65,24 +64,13 @@ function Signup() {
           <div className="col-lg-5">
             <div className="card auth-card shadow-sm border-0">
               <div className="card-body p-5">
-                <h2 className="mb-4">Sign up</h2>
+                <h2 className="mb-4">Login</h2>
 
                 {status.message && (
                   <div className={`alert alert-${status.type}`} role="alert">
                     {status.message}
                   </div>
                 )}
-
-                <div className="mb-3">
-                  <label className="form-label">Full name</label>
-                  <input
-                    type="text"
-                    className="form-control"
-                    placeholder="Enter your name"
-                    value={user.name}
-                    onChange={(e) => setUser({ ...user, name: e.target.value })}
-                  />
-                </div>
 
                 <div className="mb-3">
                   <label className="form-label">Email address</label>
@@ -100,7 +88,7 @@ function Signup() {
                   <input
                     type="password"
                     className="form-control"
-                    placeholder="Create a secure password"
+                    placeholder="Enter your password"
                     value={user.password}
                     onChange={(e) => setUser({ ...user, password: e.target.value })}
                   />
@@ -108,15 +96,15 @@ function Signup() {
 
                 <button
                   type="button"
-                  className="btn btn-primary w-100 fw-semibold"
-                  onClick={handleSignup}
+                  className="btn btn-success w-100 fw-semibold"
+                  onClick={handleLogin}
                   disabled={status.loading}
                 >
-                  {status.loading ? "Creating your account..." : "Create account"}
+                  {status.loading ? "Logging in..." : "Login"}
                 </button>
 
                 <p className="text-center text-muted mt-4 mb-0">
-                  Already have an account? <Link to="/login" className="text-primary">Login here</Link>
+                  Don't have an account? <Link to="/signup" className="text-primary">Sign up here</Link>
                 </p>
               </div>
             </div>
@@ -127,4 +115,4 @@ function Signup() {
   );
 }
 
-export default Signup;
+export default Login;

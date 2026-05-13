@@ -10,7 +10,7 @@ function Navbar() {
       <div className="container p-2">
         <Link className="navbar-brand" to="/">
           <img
-            src="\media\logo.svg"
+            src="/media/logo.svg"
             style={{ width: "25%" }}
             alt="Logo"
           />
@@ -29,6 +29,11 @@ function Navbar() {
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
           <form className="d-flex" role="search">
             <ul className="navbar-nav mb-lg-0">
+              <li className="nav-item">
+                <Link className="nav-link active" to="/login">
+                  Login
+                </Link>
+              </li>
               <li className="nav-item">
                 <Link className="nav-link active" to="/signup">
                   Signup
