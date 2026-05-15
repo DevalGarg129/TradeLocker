@@ -1,0 +1,42 @@
+services:
+
+  frontend:
+    build:
+      context: ./frontend
+    container_name: tradelocker-frontend
+    ports:
+      - "5173:80"
+    depends_on:
+      - backend
+
+  dashboard:
+    build:
+      context: ./dashboard
+    container_name: tradelocker-dashboard
+    ports:
+      - "5174:80"
+    depends_on:
+      - backend
+
+  backend:
+    build:
+      context: ./backend
+    container_name: tradelocker-backend
+    ports:
+      - "3000:3000"
+    environment:
+      - PORT=3000
+      - MONGO_URI=mongodb://mongo:27017/tradelocker
+    depends_on:
+      - mongo
+
+  mongo:
+    image: mongo:7
+    container_name: tradelocker-mongo
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo-data:/data/db
+
+volumes:
+  mongo-data:
