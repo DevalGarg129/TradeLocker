@@ -1,0 +1,125 @@
+# =========================
+# ROOT
+# =========================
+node_modules
+.env
+.env.local
+.env.production
+.env.development
+
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+
+# =========================
+# FRONTEND
+# =========================
+frontend/node_modules
+frontend/build
+frontend/dist
+frontend/.env
+frontend/.cache
+
+# React
+frontend/.eslintcache
+
+# =========================
+# DASHBOARD
+# =========================
+dashboard/node_modules
+dashboard/build
+dashboard/dist
+dashboard/.env
+dashboard/.cache
+
+# =========================
+# BACKEND
+# =========================
+backend/node_modules
+backend/.env
+
+# Runtime files
+backend/tmp
+backend/uploads
+backend/logs
+
+# =========================
+# DOCKER
+# =========================
+docker-compose.override.yml
+
+# =========================
+# KUBERNETES
+# =========================
+*.secret.yaml
+secrets.yaml
+kubeconfig.yaml
+
+# =========================
+# PM2
+# =========================
+.pm2
+
+# =========================
+# COVERAGE / TESTING
+# =========================
+coverage
+.nyc_output
+
+# =========================
+# CACHE
+# =========================
+.cache
+.parcel-cache
+
+# =========================
+# TYPESCRIPT
+# =========================
+*.tsbuildinfo
+
+# =========================
+# TEMP FILES
+# =========================
+tmp/
+temp/
+
+# =========================
+# CERTIFICATES
+# =========================
+*.pem
+*.key
+*.crt
+
+# =========================
+# TERRAFORM (future infra)
+# =========================
+.terraform
+*.tfstate
+*.tfstate.backup
+
+# =========================
+# K8S SECRETS
+# =========================
+secret.yaml
+secrets/
+
+# =========================
+# MONGO DATA
+# =========================
+mongo-data/
+
+# =========================
+# NGINX
+# =========================
+nginx/logs
