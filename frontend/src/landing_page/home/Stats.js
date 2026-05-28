@@ -31,14 +31,14 @@ function Stats() {
         <div className="col-6 p-5">
           <img src="media/images/ecosystem.png" style={{ width: "90%" }} />
           <div className="text-center">
-            <a href="#" className="mx-5" style={{ textDecoration: "none" }}>
+            <button type="button" className="btn btn-link p-0 mx-5" style={{ textDecoration: "none" }} onClick={(e)=>e.preventDefault()}>
               Explore our products{" "}
               <i className="fa fa-long-arrow-right" aria-hidden="true"></i>
-            </a>
-            <a href="#" style={{ textDecoration: "none" }}>
+            </button>
+            <button type="button" className="btn btn-link p-0" style={{ textDecoration: "none" }} onClick={(e)=>e.preventDefault()}>
               Try Kite demo{" "}
               <i className="fa fa-long-arrow-right" aria-hidden="true"></i>
-            </a>
+            </button>
           </div>
         </div>
       </div>

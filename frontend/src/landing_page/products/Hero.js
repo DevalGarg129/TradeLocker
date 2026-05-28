@@ -10,10 +10,10 @@ function Hero() {
         </h3>
         <p className="mt-3 mb-5">
           Check out our{" "}
-          <a href="#" style={{ textDecoration: "none" }}>
-            investment offerings{" "}
+          <button type="button" className="btn btn-link p-0" style={{ textDecoration: "none" }} onClick={(e)=>e.preventDefault()}>
+            investment offerings {" "}
             <i className="fa fa-long-arrow-right" aria-hidden="true"></i>
-          </a>
+          </button>
         </p>
       </div>
     </div>

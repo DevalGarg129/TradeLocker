@@ -31,8 +31,8 @@ function Team() {
           </p>
           <p>Playing basketball is his zen.</p>
           <p>
-            Connect on <a href="#">Homepage</a> / <a href="#">TradingQnA</a> /{" "}
-            <a href="#">Twitter</a>
+            Connect on <button type="button" className="btn btn-link p-0" onClick={(e)=>e.preventDefault()}>Homepage</button> / <button type="button" className="btn btn-link p-0" onClick={(e)=>e.preventDefault()}>TradingQnA</button> /{" "}
+            <button type="button" className="btn btn-link p-0" onClick={(e)=>e.preventDefault()}>Twitter</button>
           </p>
         </div>
       </div>
