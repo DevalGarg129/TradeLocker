@@ -8,11 +8,15 @@ function RightSection({ imageURL, productName, productDesription, learnMore }) {
           <h1>{productName}</h1>
           <p>{productDesription}</p>
           <div>
-            <a href={learnMore}>Learn More</a>
+            {learnMore ? (
+              <a href={learnMore}>Learn More</a>
+            ) : (
+              <button type="button" className="btn btn-link p-0" onClick={(e)=>e.preventDefault()}>Learn More</button>
+            )}
           </div>
         </div>
         <div className="col-6">
-          <img src={imageURL} />
+          <img src={imageURL} alt={`${productName} screenshot`} />
         </div>
       </div>
     </div>
